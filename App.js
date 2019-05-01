@@ -16,6 +16,8 @@ import {
   ScrollView  } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
+console.disableYellowBox = true; // Disable React Native Warning bottom box
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////[ H O M E]/////////////////////////////
 
@@ -36,7 +38,7 @@ class HomeScreen extends React.Component {
   
      <View >
 
-      <Home/>  
+      <Home />  
 
       <View style={{position: "absolute", top: 10, right: 0}}>
         <View style={{flexDirection: "row", justifyContent: 'center'}}>

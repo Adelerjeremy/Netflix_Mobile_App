@@ -14,7 +14,7 @@ import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, Button } fr
       <View>
         <Text>{id}</Text>
         <Text>{title}</Text>
-      
+        <Text style={{flex:1, fontSize: 22}}>Welcome to Details Page</Text>    
       </View>
     )
   }
