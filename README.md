@@ -5,7 +5,7 @@
 
 *Version 0.1*
 
-![](https://media.giphy.com/media/LMnDyz62K5kXDiMW3t/source.gif)
+![](https://media.giphy.com/media/LMnDyz62K5kXDiMW3t/giphy.gif)
 
 ```
 Cette dernière nous permet :
