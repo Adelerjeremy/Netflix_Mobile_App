@@ -1,0 +1,303 @@
+////////////////////////////////////////////////////////////
+///////////>>|                                |<<///////////
+///////////>>|        RESSOURCE  A P I        |<<///////////
+///////////>>|________________________________|<</////////// 
+
+TVMAZE API: 
+
+| http://api.tvmaze.com/shows .
+|
+|=>>------ 250 SERIES --------<<
+
+
+<================[ S T R U C T U R E ]==================>
+
+[
+    {
+        id: 1,
+        url: "http://www.tvmaze.com/shows/1/under-the-dome",
+        name: "Under the Dome",
+        type: "Scripted",
+        language: "English",
+        genres: [
+            "Drama",
+            "Science-Fiction",
+            "Thriller"
+        ],
+        status: "Ended",
+        runtime: 60,
+        premiered: "2013-06-24",
+        officialSite: "http://www.cbs.com/shows/under-the-dome/",
+        schedule: {
+            time: "22:00",
+            days: [
+                "Thursday"
+            ]
+        },
+        rating: {
+            average: 6.5
+        },
+            weight: 94,
+            network: {
+            id: 2,
+            name: "CBS",
+            country: {
+            name: "United States",
+            code: "US",
+            timezone: "America/New_York"
+        }
+        },
+        webChannel: null,
+        externals: {
+            tvrage: 25988,
+            thetvdb: 264492,
+            imdb: "tt1553656"
+        },
+        image: {
+            medium: "http://static.tvmaze.com/uploads/images/medium_portrait/81/202627.jpg",
+            original: "http://static.tvmaze.com/uploads/images/original_untouched/81/202627.jpg"
+        },
+        summary: "<p><b>Under the Dome</b> is the story of a small town that is suddenly and inexplicably sealed off from the rest of the world by an enormous transparent dome. The town's inhabitants must deal with surviving the post-apocalyptic conditions while searching for answers about the dome, where it came from and if and when it will go away.</p>",
+        updated: 1549572248,
+        _links: {
+            self: {
+                href: "http://api.tvmaze.com/shows/1"
+        },
+        previousepisode: {
+            href: "http://api.tvmaze.com/episodes/185054"
+            }
+        }
+    }
+]
+
+/*--------------------------------------------------------------------------------------*/
+
+The moviedb API: 
+
+https://api.themoviedb.org/3/movie/popular?api_key=96df8c4ef291f2ea745b3f412a669c61&page=1 .POPULAR
+                                     |                                              |
+                                     |=>>Films Récent                               |=>>[PAGES= 989]
+
+https://api.themoviedb.org/3/movie/top_rated?api_key=96df8c4ef291f2ea745b3f412a669c61&page=1 .TOP RATED
+|                                    |                                               |    
+|                                    |=>>Film les mieux notées                       |
+|                                        [ Ordre Croissant ]                         |=>>[PAGES= 356]
+|
+|=>>------ 7107 FILMS --------<< { TOP RATED }
+|=>>------ 19765 FILMS -------<< { POPULAR }
+ 
+
+<================[ S T R U C T U R E ]==================>
+
+  "results": [
+    {
+      "vote_count": 5309,
+      "id": 510,
+      "video": false,
+      "vote_average": 8.4,
+      "title": "One Flew Over the Cuckoo's Nest",
+      "popularity": 25.099,
+      "poster_path": "/2Sns5oMb356JNdBHgBETjIpRYy9.jpg",
+      "original_language": "en",
+      "original_title": "One Flew Over the Cuckoo's Nest",
+      "genre_ids": [
+        18
+      ],
+      "backdrop_path": "/4E7YQcwui0PfNXguf4V2X8YocPC.jpg",
+      "adult": false,
+      "overview": "While serving time for insanity at a state mental hospital, implacable rabble-rouser, Randle Patrick McMurphy, inspires his fellow patients to rebel against the authoritarian rule of head nurse, Mildred Ratched.",
+      "release_date": "1975-11-18"
+    }
+  ]
+
+The moviedb API: =====>  [ MOVIE ]  <======
+
+  https://api.themoviedb.org/3/tv/63174/videos?api_key=96df8c4ef291f2ea745b3f412a669c61&language=en-US
+                                    |   
+                                    |=>ID de la série/film
+
+
+  <================[ S T R U C T U R E ]==================>
+
+
+{
+    id: 63174,
+    results: [
+        {
+            id: "559cb55d9251414211000c79",
+            iso_639_1: "en",
+            iso_3166_1: "US",
+            key: "X4bF_quwNtw",
+            name: "Official Trailer | Season 1 | LUCIFER",
+            site: "YouTube",
+            size: 720,
+            type: "Trailer"
+        }
+    ]
+}
+
+
+===========================================================////////// [   G E N R E S   ] \\\\\\\\\\=========================================================================
+
+***********************[ M O V I E S ]*************************
+
+https://api.themoviedb.org/3/genre/movie/list?api_key=96df8c4ef291f2ea745b3f412a669c61
+
+ <================[ S T R U C T U R E ]==================>
+
+ {
+    genres: [
+        {
+            id: 28,
+            name: "Action"
+        },
+        {
+            id: 12,
+            name: "Adventure"
+        },
+        {
+            id: 16,
+            name: "Animation"
+        },
+        {
+            id: 35,
+            name: "Comedy"
+        },
+        {
+            id: 80,
+            name: "Crime"
+        },
+        {
+            id: 99,
+            name: "Documentary"
+        },
+        {
+            id: 18,
+            name: "Drama"
+        },
+        {
+            id: 10751,
+            name: "Family"
+        },
+        {
+            id: 14,
+            name: "Fantasy"
+        },
+        {
+            id: 36,
+            name: "History"
+        },
+        {
+            id: 27,
+            name: "Horror"
+        },
+        {
+            id: 10402,
+            name: "Music"
+        },
+        {
+            id: 9648,
+            name: "Mystery"
+        },
+        {
+            id: 10749,
+            name: "Romance"
+        },
+        {
+            id: 878,
+            name: "Science Fiction"
+        },
+        {
+            id: 10770,
+            name: "TV Movie"
+        },
+        {
+            id: 53,
+            name: "Thriller"
+        },
+        {
+            id: 10752,
+            name: "War"
+        },
+        {
+            id: 37,
+            name: "Western"
+        }
+    ]
+}
+
+
+*************************[ T V ]*************************
+
+https://api.themoviedb.org/3/genre/tv/list?api_key=96df8c4ef291f2ea745b3f412a669c61
+
+ <================[ S T R U C T U R E ]==================>
+
+{
+    genres: [
+        {
+            id: 10759,
+            name: "Action & Adventure"
+        },
+        {
+            id: 16,
+            name: "Animation"
+        },
+        {
+            id: 35,
+            name: "Comedy"
+        },
+        {
+            id: 80,
+            name: "Crime"
+        },
+        {
+            id: 99,
+            name: "Documentary"
+        },
+        {
+            id: 18,
+            name: "Drama"
+        },
+        {
+            id: 10751,
+            name: "Family"
+        },
+        {
+            id: 10762,
+            name: "Kids"
+        },
+        {
+            id: 9648,
+            name: "Mystery"
+        },
+        {
+            id: 10763,
+            name: "News"
+        },
+        {
+            id: 10764,
+            name: "Reality"
+        },
+        {
+            id: 10765,
+            name: "Sci-Fi & Fantasy"
+        },
+        {
+            id: 10766,
+            name: "Soap"
+        },
+        {
+            id: 10767,
+            name: "Talk"
+        },
+        {
+            id: 10768,
+            name: "War & Politics"
+        },
+        {
+            id: 37,
+            name: "Western"
+        }
+    ]
+}

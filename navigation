@@ -1,0 +1,273 @@
+import React from 'react';
+import { Button, Text, View,TouchableOpacity, StyleSheet, StatusBar, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ H O M E]/////////////////////////////
+
+class HomeScreen extends React.Component {
+
+   static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+
+    componentDidMount() {
+      //To hide all status bar Screen
+      StatusBar.setHidden(true);
+    }
+
+  render() {
+    return (
+      <View >
+
+        <View style={{flexDirection: "row", justifyContent: 'space-between', position: "relative", top: 10, right: 10}}>
+
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('Home')} >
+
+          <Image 
+          style={{width: 50, height: 50, position: "relative", top: -15}} 
+          source={{uri: `https://res.cloudinary.com/dfc5jnbxg/image/upload/v1553629074/Portfolio%20Adflix/logo-de-netflix.png`
+          }}
+          />
+           </TouchableOpacity>
+        
+          <TouchableOpacity 
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('Series')} >
+
+            <Text style={{fontSize:18, paddingRight: 20}}>Series</Text>
+              
+          </TouchableOpacity>
+
+            <TouchableOpacity
+            style={styles.button}          
+            onPress={() => this.props.navigation.navigate('Movies')} >  
+
+              <Text style={{fontSize:18, paddingRight: 20}}>Movies</Text>
+
+            </TouchableOpacity>
+
+            <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('MaListe')} >
+
+              <Text style={{fontSize:18, paddingRight: 20}}>Ma liste</Text>
+            
+            </TouchableOpacity>
+          </View>
+
+          <View style={{flex:1, justifyContent: 'center', alignItems: 'center' }}>
+             <Text style={{fontSize:25}}>WELCOME TO HOME PAGE</Text>
+          </View>
+      </View>
+    );
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ S E R I E S]/////////////////////////////
+
+class SeriesScreen extends React.Component {
+     static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+  render() {
+    return (
+         <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+
+        <View style={{flexDirection: "row", justifyContent: 'space-between', position: "relative", top: 10, right: 10}}>
+
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('Home')} >
+
+          <Image 
+          style={{width: 50, height: 50, position: "relative", top: -15}} 
+          source={{uri: `https://res.cloudinary.com/dfc5jnbxg/image/upload/v1553629074/Portfolio%20Adflix/logo-de-netflix.png`
+          }}
+          />
+           </TouchableOpacity>
+        
+          <TouchableOpacity 
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('Series')} >
+
+            <Text style={{fontSize:18, paddingRight: 30}}>Series</Text>
+              
+          </TouchableOpacity>
+
+            <TouchableOpacity
+            style={styles.button}          
+            onPress={() => this.props.navigation.navigate('Movies')} >  
+
+              <Text style={{fontSize:18, paddingRight: 30}}>Movies</Text>
+
+            </TouchableOpacity>
+
+            <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('MaListe')} >
+
+              <Text style={{fontSize:18, paddingRight: 30}}>Ma liste</Text>
+            
+            </TouchableOpacity>
+          </View>
+
+          <View style={{flex:1, justifyContent: 'center', alignItems: 'center' }}>
+             <Text style={{fontSize:25}}>WELCOME TO SERIES PAGE</Text>
+          </View>
+      </View>
+    );
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ M O V I E S]/////////////////////////////
+
+class MoviesScreen extends React.Component {
+     static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+  render() {
+    return (
+            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+
+        <View style={{flexDirection: "row", justifyContent: 'space-between', position: "relative", top: 10, right: 10}}>
+
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('Home')} >
+
+          <Image 
+          style={{width: 50, height: 50, position: "relative", top: -15}} 
+          source={{uri: `https://res.cloudinary.com/dfc5jnbxg/image/upload/v1553629074/Portfolio%20Adflix/logo-de-netflix.png`
+          }}
+          />
+           </TouchableOpacity>
+        
+          <TouchableOpacity 
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('Series')} >
+
+            <Text style={{fontSize:18, paddingRight: 30}}>Series</Text>
+              
+          </TouchableOpacity>
+
+            <TouchableOpacity
+            style={styles.button}          
+            onPress={() => this.props.navigation.navigate('Movies')} >  
+
+              <Text style={{fontSize:18, paddingRight: 30}}>Movies</Text>
+
+            </TouchableOpacity>
+
+            <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('MaListe')} >
+
+              <Text style={{fontSize:18, paddingRight: 30}}>Ma liste</Text>
+            
+            </TouchableOpacity>
+          </View>
+
+          <View style={{flex:1, justifyContent: 'center', alignItems: 'center' }}>
+             <Text style={{fontSize:25}}>WELCOME TO MOVIES PAGE</Text>
+          </View>
+      </View>
+    );
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ M A  L I S T E]/////////////////////////////
+
+class MaListeScreen extends React.Component {
+     static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+  render() {
+    return (
+      <View style={{flex: 1, justifyContent: 'flex-start' }}>
+     
+        <View style={{flexDirection: "row", justifyContent: 'space-between', position: "relative", top: 10, right: 10}}>
+
+          <TouchableOpacity 
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('Home')} >
+
+            <Image 
+            style={{width: 50, height: 50, position: "relative", top: -15}} 
+            source={{uri: `https://res.cloudinary.com/dfc5jnbxg/image/upload/v1553629074/Portfolio%20Adflix/logo-de-netflix.png`
+            }}
+            />
+            </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('MaListe')} >
+
+              <Text style={{fontSize:18, paddingRight: 30}}>Ma liste</Text>
+            
+          </TouchableOpacity>
+
+
+           </View>
+            <View style={{flex:1, justifyContent: 'center', alignItems: 'center' }}>
+             <Text style={{fontSize:25}}>WELCOME TO MA LISTE PAGE</Text>
+          </View>
+      </View>
+    );
+  }
+}
+
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+  Series: SeriesScreen,
+  Movies: MoviesScreen,
+  MaListe: MaListeScreen,    
+
+
+});
+
+const SeriesStack = createStackNavigator({
+  Home: HomeScreen,
+  Series: SeriesScreen ,
+  Movies: MoviesScreen ,
+  MaListe: MaListeScreen
+});
+const MoviesStack = createStackNavigator({
+  Home: HomeScreen,
+  Series: SeriesScreen ,
+  Movies: MoviesScreen ,
+  MaListe: MaListeScreen
+});
+
+const MaListeStack = createStackNavigator({
+  Home: HomeScreen,
+  Series: SeriesScreen ,
+  Movies: MoviesScreen ,
+  MaListe: MaListeScreen
+});
+
+const AppContainer = createAppContainer(HomeStack,SeriesStack,MoviesStack,MaListeStack);
+
+export default class App extends React.Component {
+  render() {
+    return <AppContainer  />;
+  }
+}
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: 'transparent',
+    color: "#000",
+    padding: 10,
+  }
+})
