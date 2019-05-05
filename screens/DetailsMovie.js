@@ -47,7 +47,7 @@ import {
 
         this.setState({
           isLoading: false,
-          dataSource: data.results[1]
+          dataSource: data.results[0]
         })
 
         .catch((error) => {

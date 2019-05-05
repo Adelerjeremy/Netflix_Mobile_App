@@ -225,6 +225,118 @@ https://api.themoviedb.org/3/genre/movie/list?api_key=96df8c4ef291f2ea745b3f412a
         }
     ]
 }
+===========================================================////////// [  A C T O R S  ] \\\\\\\\\\=========================================================================
+
+***********************[ M O V I E S ]*************************
+
+https://api.themoviedb.org/3/movie/299534/credits?api_key=96df8c4ef291f2ea745b3f412a669c61
+
+exemple liste longue!
+target les 3/4 premieres.
+{
+    id: 299534,
+    cast: [
+        {
+            cast_id: 55,
+            character: "Tony Stark / Iron Man",
+            credit_id: "58700eee9251412ae400238b",
+            gender: 2,
+            id: 3223,
+            name: "Robert Downey Jr.",
+            order: 0,
+            profile_path: "/1YjdSym1jTG7xjHSI0yGGWEsw5i.jpg"
+        },
+        {
+            cast_id: 22,
+            character: "Steve Rogers / Captain America",
+            credit_id: "585d55afc3a368408600c438",
+            gender: 2,
+            id: 16828,
+            name: "Chris Evans",
+            order: 1,
+            profile_path: "/7dUkkq1lK593XvOjunlUB11lKm1.jpg"
+        },
+        {
+            cast_id: 23,
+            character: "Thor Odinson",
+            credit_id: "585d55c1c3a368409300cdfd",
+            gender: 2,
+            id: 74568,
+            name: "Chris Hemsworth",
+            order: 2,
+            profile_path: "/bKz3pRMGLVI9Nur8eA4gqEQfd8d.jpg"
+        }
+    ]
+}
+
+===========================================================////////// [  A L L - I N F O  ] \\\\\\\\\\=========================================================================
+
+***********************[ M O V I E S ]*************************
+
+https://api.themoviedb.org/3/movie/299534?api_key=96df8c4ef291f2ea745b3f412a669c61&language=en-US
+
+{
+    adult: false,
+    backdrop_path: "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+    belongs_to_collection: {
+        id: 86311,
+        name: "The Avengers Collection",
+        poster_path: "/qJawKUQcIBha507UahUlX0keOT7.jpg",
+        backdrop_path: "/zuW6fOiusv4X9nnW3paHGfXcSll.jpg"
+    },
+    budget: 500000000,
+    genres: [
+        {
+            id: 12,
+            name: "Adventure"
+        },
+        {
+            id: 878,
+            name: "Science Fiction"
+        },
+        {
+            id: 28,
+            name: "Action"
+        }
+    ],
+    homepage: "https://www.marvel.com/movies/avengers-endgame",
+    id: 299534,
+    imdb_id: "tt4154796",
+    original_language: "en",
+    original_title: "Avengers: Endgame",
+    overview: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store.",
+    popularity: 482.931,
+    poster_path: "/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
+    production_companies: [
+        {
+            id: 420,
+            logo_path: "/hUzeosd33nzE5MCNsZxCGEKTXaQ.png",
+            name: "Marvel Studios",
+            origin_country: "US"
+        }
+        ],
+    production_countries: [
+        {
+            iso_3166_1: "US",
+            name: "United States of America"
+            }
+        ],
+            release_date: "2019-04-24",
+            revenue: 1914531638,
+            runtime: 181,
+    spoken_languages: [
+        {
+            iso_639_1: "en",
+            name: "English"
+        }
+    ],
+    status: "Released",
+    tagline: "Part of the journey is the end.",
+    title: "Avengers: Endgame",
+    video: false,
+    vote_average: 8.6,
+    vote_count: 4084
+}
 
 
 *************************[ T V ]*************************
