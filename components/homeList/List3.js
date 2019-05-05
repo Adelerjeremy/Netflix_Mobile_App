@@ -1,8 +1,7 @@
-
 import React from 'react';
 import Config from '../../Config';
-import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator } from 'react-native';
-
+import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, Button,TouchableOpacity } from 'react-native';
+import { createStackNavigator, createAppContainer, withNavigation } from 'react-navigation';
 
 
 class List3 extends React.Component {
@@ -39,84 +38,78 @@ class List3 extends React.Component {
 
     }
 
-    // componentDidMount() {
-    //     ApiPopular.getPopularMovies()
-    //     .then(movies => {
-    //         this.setState({
-    //             movies
-    //         });
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-    // };
-
-
-    renderItem({ item }) {
-
-      return (
-        <View>
-         <Image style={{width:120, height: 180}} source={{uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`}} />
-        </View>
-      )
-    }
-
-
-
-  render() {
-
-    if(this.state.isLoading) {
-
-      return (
-        <View style={Styles.container}>
-
-          <ActivityIndicator/>
-
-        </View>
-      );
-
-    } else {
-
-      return (
-
-        <View style={Styles.container}>
-
-          <Text style={Styles.texte}>Séries US</Text>
-
-          <View style={Styles.row}>
-
-            <FlatList
-              ItemSeparatorComponent={() => <View style={{width:10}}/>}
-              horizontal
-              data={this.state.dataSource}
-              renderItem={this.renderItem}/>
-              
+    render() {
+      const { navigate } = this.props.navigation;
+      const {dataSource} = this.state;
+      if(this.state.isLoading) {
+  
+        return (
+          <View style={Styles.container}>
+  
+            <ActivityIndicator/> 
+  
           </View>
-
-        </View>
-      )
+        );
+  
+      } else {
+  
+        return (
+  
+          <View style={Styles.container}>
+  
+            <Text style={Styles.texte}>Tendances actuelles</Text>
+  
+            <View style={Styles.row}>
+     
+              <FlatList
+                ItemSeparatorComponent={() => (
+                  <View style={{width:10}}/>
+                )}
+                horizontal
+                style={{zIndex: 10}}
+                keyExtractor={dataSource.id}
+                data={dataSource}
+                renderItem={({item, separators}) => (
+                  <View>
+                    <TouchableOpacity  onPress={() => {
+                     navigate('DetailsSerie', {...item}) 
+                     }}>
+                      <Image 
+                        style={{width:120, height: 180}}
+                        source={{uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} 
+                      />  
+                    </TouchableOpacity>
+                  </View>
+                )}/>
+        
+                
+            </View>
+  
+          </View>
+        )
+      }
     }
   }
-}
-
-export default List3;
-
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1 ,
-    paddingTop: 40,
-  },
-  row: {
-    justifyContent: "center",
-    alignItems: 'center',
-  },
-  texte: {
-    textAlign: "left",
-    paddingLeft: 5,
-    paddingBottom: 5,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#fafafa",
-  }
-
-});
+   export default withNavigation(List3);
+   
+  const Styles = StyleSheet.create({
+    container: {
+      flex: 1 ,
+      position: "relative",
+      top: 15,
+      left: 0,
+    },
+    row: {
+      justifyContent: "center",
+      alignItems: 'center',
+    },
+    texte: {
+      textAlign: "left",
+      paddingLeft: 5,
+      paddingBottom: 5,
+      fontSize: 18,
+      fontWeight: "bold",
+      color: "#fafafa",
+    }
+  
+  });

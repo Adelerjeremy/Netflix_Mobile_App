@@ -3,7 +3,9 @@ import Home from './screens/Home';
 import Series from './screens/Series';
 import Movies from './screens/Movies';
 import MaListe from './screens/MaListe';
-import Details from './screens/Details';
+import DetailsMovie from './screens/DetailsMovie';
+import DetailsSerie from './screens/DetailsSerie';
+import Player from './screens/Player';
 
 import { 
   Button, 
@@ -13,11 +15,23 @@ import {
   StyleSheet, 
   StatusBar, 
   Image, 
-  ScrollView  } from 'react-native';
+  ScrollView,
+  Dimensions} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+
+import { ScreenOrientation } from 'expo';
+
+
+
 
 console.disableYellowBox = true; // Disable React Native Warning bottom box
 
+const ORIENTATION_DEFAULT = Expo.ScreenOrientation.Orientation.ALL;
+const ORIENTATIONS = {
+  'portrait': Expo.ScreenOrientation.Orientation.PORTRAIT,
+  'landscape': Expo.ScreenOrientation.Orientation.LANDSCAPE,
+  'default': ORIENTATION_DEFAULT,
+};
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////[ H O M E]/////////////////////////////
 
@@ -226,14 +240,81 @@ class MaListeScreen extends React.Component {
 }
 
 //////////////////////////////////////////////////////////////////////////////
-//////////////////////////[ D E T A I L S]/////////////////////////////
+//////////////////////////[ D E T A I L S : M O V I E ]/////////////////////////////
 
 
-class DetailsScreen extends React.Component {
+class DetailsMovieScreen extends React.Component {
+  static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+
+
+    componentDidMount() {
+      //To hide all status bar Screen
+      StatusBar.setHidden(true);
+    }
+ 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Details />
+      <View style={Styles.detailPage}>
+        <DetailsMovie />
+      </View>
+    );
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ D E T A I L S : S E R I E ]/////////////////////////////
+
+
+class DetailsSerieScreen extends React.Component {
+  static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+
+
+    componentDidMount() {
+      //To hide all status bar Screen
+      StatusBar.setHidden(true);
+    }
+ 
+  render() {
+    return (
+      <View style={Styles.detailPage}>
+        <DetailsSerie />
+      </View>
+    );
+  }
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ P L A Y E R ]/////////////////////////////
+
+
+class PlayerScreen extends React.Component {
+  static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+  componentDidMount () {
+    StatusBar.setHidden(true);
+    ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+  }
+  componentWillUnmount () {
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+  }
+  
+
+ 
+  render() {
+    return (
+      <View allow="portrait" style={Styles.playerPage}>
+        <Player />
       </View>
     );
   }
@@ -288,7 +369,9 @@ const NavigationConfig = () => {
 
 const HomeStack = createStackNavigator({
  Home: HomeScreen,
- Details: DetailsScreen,
+ DetailsMovie: DetailsMovieScreen,
+ DetailsSerie: DetailsSerieScreen,
+ Player: PlayerScreen,
  Series: SeriesScreen,
  Movies: MoviesScreen,
  MaListe: MaListeScreen,    
@@ -296,6 +379,8 @@ const HomeStack = createStackNavigator({
 
 const SeriesStack = createStackNavigator({
  Home: HomeScreen,
+ DetailsMovie: DetailsMovieScreen,
+ DetailsSerie: DetailsSerieScreen,
  Series: SeriesScreen ,
  Movies: MoviesScreen ,
  MaListe: MaListeScreen
@@ -303,6 +388,8 @@ const SeriesStack = createStackNavigator({
 
 const MoviesStack = createStackNavigator({
  Home: HomeScreen,
+ DetailsMovie: DetailsMovieScreen,
+ DetailsSerie: DetailsSerieScreen,
  Series: SeriesScreen ,
  Movies: MoviesScreen ,
  MaListe: MaListeScreen
@@ -310,6 +397,8 @@ const MoviesStack = createStackNavigator({
 
 const MaListeStack = createStackNavigator({
  Home: HomeScreen,
+ DetailsMovie: DetailsMovieScreen,
+ DetailsSerie: DetailsSerieScreen,
  Series: SeriesScreen ,
  Movies: MoviesScreen ,
  MaListe: MaListeScreen
@@ -328,10 +417,22 @@ export default class App extends React.Component {
 
 const Styles = StyleSheet.create({
   container: {
-    flex: 1 ,
+    flex: 1,
     justifyContent: "center",
     alignItems: 'center',
     backgroundColor: '#1b1b1b',
+  },
+  detailPage: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: 'center',
+    backgroundColor: '#131313',
+  },
+  playerPage: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: 'center',
+    backgroundColor: '#000',
   },
   button: {
     backgroundColor: 'transparent',

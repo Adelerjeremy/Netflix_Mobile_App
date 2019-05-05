@@ -103,7 +103,9 @@ export default List2;
 const Styles = StyleSheet.create({
   container: {
     flex: 1 ,
-    paddingTop: -20,
+    position: "relative",
+    top: -18,
+    left: 0,
   },
   row: {
     justifyContent: "center",

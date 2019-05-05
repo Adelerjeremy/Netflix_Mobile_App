@@ -1,6 +1,6 @@
 import React from 'react';
 import Config from '../../Config';
-import Details from '../../screens/Details'
+import DetailsMovie from '../../screens/DetailsMovie';
 import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, Button,TouchableOpacity } from 'react-native';
 import { createStackNavigator, createAppContainer, withNavigation } from 'react-navigation';
 
@@ -41,37 +41,6 @@ class List1 extends React.Component {
 
     }
 
-    // componentDidMount() {
-    //     ApiPopular.getPopularMovies()
-    //     .then(movies => {
-    //         this.setState({
-    //             movies
-    //         });
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-    // };
-
-
-    // renderItem({ item }) {
-
-    //   return (
-    //     <View>
-      
-    //   <TouchableOpacity
-    //           onPress={() => { this.props.navigation.navigate('Details') }}>
-    //         <Image 
-    //         style={{width:120, height: 180}}
-    //         source={{uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }} 
-    //         />    
-    // </TouchableOpacity>
-     
-    //     </View>
-    //   )
-    // }
-
-
 
   render() {
     const { navigate } = this.props.navigation;
@@ -107,7 +76,7 @@ class List1 extends React.Component {
               renderItem={({item, separators}) => (
                 <View>
                   <TouchableOpacity  onPress={() => {
-                   navigate('Details') 
+                   navigate('DetailsMovie', {...item}) 
                    }}>
                     <Image 
                       style={{width:120, height: 180}}
@@ -126,9 +95,6 @@ class List1 extends React.Component {
   }
 }
  export default withNavigation(List1);
- 
-
-
 
 const Styles = StyleSheet.create({
   container: {
