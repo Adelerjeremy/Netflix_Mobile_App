@@ -3,9 +3,9 @@
 **Application de Streaming** - *(Netflix like)* - est une application React Native utilisant l'[API TheMovieDb](https://www.themoviedb.org/). 
 
 
-*Version 0.1*
+*Version 0.2*
 
-![](https://media.giphy.com/media/LMnDyz62K5kXDiMW3t/giphy.gif)
+![](https://media.giphy.com/media/JNxpumqDCO9WjuwkGm/giphy.gif)
 
 ```
 Cette dernière nous permet :
