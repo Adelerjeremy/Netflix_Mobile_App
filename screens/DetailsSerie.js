@@ -252,10 +252,10 @@ const Styles = StyleSheet.create({
     borderRadius: 4
   },
   description: {
-    color: "#fff",
+    color: "#ddd",
     fontSize: 14,
-    letterSpacing: 0.5,
-    lineHeight: 25
+    letterSpacing: 0.2,
+    lineHeight: 20
   },
   box_3: {
     flexDirection: "row",

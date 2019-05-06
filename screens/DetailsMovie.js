@@ -28,34 +28,64 @@ import {
      super(props);
      this.state= {
         isLoading: true,
-        dataSource: [],
+        dataSourceVideos: [],
+        dataSourceCredits: [],
         id:""
      }
    }
 
   componentDidMount() {
-
     console.log('>> DetailsMovie#componentDidMount');
-    const url = `https://api.themoviedb.org/3/movie/${this.props.navigation.state.params.id}/videos?api_key=${Config.API_KEY}`;
-    console.log('DetailsMovie#componentDidMount//url: ', url)
-    console.log('DetailsMovie#componentDidMount//this.props.navigation.state.params.id: ', this.props.navigation.state.params.id)
 
-    fetch(url)
+     /////////////////////////////[ U R L S ]//////////////////////////////////////
+    const urlCredit = `https://api.themoviedb.org/3/movie/${this.props.navigation.state.params.id}/credits?api_key=${Config.API_KEY}`;
+    const urlVideo = `https://api.themoviedb.org/3/movie/${this.props.navigation.state.params.id}/videos?api_key=${Config.API_KEY}`;
+
+    //---------------------------------------------------------------------------->
+
+    console.log('DetailsMovie#componentDidMount//urlVideo: ', urlVideo);
+    console.log('DetailsMovie#componentDidMount//urlCredit: ', urlCredit);
+    console.log('DetailsMovie#componentDidMount//this.props.navigation.state.params.id: ', this.props.navigation.state.params.id)
+    //---------------------------------------------------------------------------->
+
+    /////////////////////////////[ F E T C H : V I D E O S ]/////////////////////////////////
+      fetch(urlVideo)
+        .then(res => res.json())
+        .then(data => {
+          console.log('DetailsMovie#componentDidMount//urlVideos data: ', data);
+          this.setState({
+            isLoading: false,
+            dataSourceVideos: data.results[0]
+          })
+          .catch((error) => {
+            console.error(error);
+        });
+        console.log('<< DetailsMovie#componentDidMount//urlVideo');
+      });
+    /////////////////////////////[ F E T C H : C R E D I T S ]/////////////////////////////////
+      fetch(urlCredit)
       .then(res => res.json())
       .then(data => {
-        console.log('DetailsMovie#Popular#componentDidMount data: ', data);
-
+        console.log('DetailsMovie#componentDidMount//urlCredits data: ', data);
         this.setState({
           isLoading: false,
-          dataSource: data.results[0]
-        })
+          dataSourceCredits: {
 
+            data_1: data.cast[0].name,
+            data_2: data.cast[1].name,
+            data_3: data.cast[2].name,
+            data_4: data.crew[0].name,
+            data_5: data.crew[1].name
+
+          }
+        })
         .catch((error) => {
           console.error(error);
       });
-      console.log('<< DetailsMovie#componentDidMount');
+      console.log('<< DetailsMovie#componentDidMount//urlCredits');
     });
-  }
+
+  } //=> END componentDidMount()
 
 
 
@@ -69,28 +99,48 @@ import {
       release_date,
       genre_ids,
     } = this.props.navigation.state.params;
-    const {dataSource} = this.state;
-    console.log('DetailsMovie#render()//dataSource.key: ', dataSource.key)
+    const { dataSourceVideos, dataSourceCredits,data_1  } = this.state;
+
+    ///////////////////////////////////////////////////////
+    //////////////////[ A C T O R S ]/////////////////////
+    const actor_1 = dataSourceCredits.data_1;
+    console.log('DetailsMovie#render()//actor_1 ', actor_1)
+    const actor_2 = dataSourceCredits.data_2;
+    console.log('DetailsMovie#render()//actor_2 ', actor_2)
+    const actor_3 = dataSourceCredits.data_3;
+    console.log('DetailsMovie#render()//actor_3 ', actor_3)
+    ///////////////////////////////////////////////////////
+  
+    ///////////////////////////////////////////////////////
+    /////////////////[ C R E A T O R S ]///////////////////
+    const creator_1 = dataSourceCredits.data_4;
+    console.log('DetailsMovie#render()//creator_1 ', creator_1)
+    const creator_2 = dataSourceCredits.data_5;
+    console.log('DetailsMovie#render()//creator_2 ', creator_2)
+     ///////////////////////////////////////////////////////
+
+    console.log('DetailsMovie#render()//dataSource.key: ', dataSourceVideos.key)
     console.log('>> DetailsMovie#render()');
     console.log('DetailsMovie#render()/this.props ', this.props);
     console.log('DetailsMovie#render()/this.props.navigation.state.params ', this.props.navigation.state.params)
 
     /////////////////////////////////////////
-    /////////[ TARGET ANNEE UNIQUEMENT]//////
+    ///////////////[ D A T E ]//////////////
     let getDate = release_date;
     let date = getDate.slice(0, 4);
     /////////////////////////////////////////
 
     /////////////////////////////////////////
-    /////////[ P O U R C E N T A G E]//////
+    /////////[ P O U R C E N T A G E ]//////
     let getVote = vote_average;
     let result = getVote / 10 * 100;
     let rating = Math.round(result)
     /////////////////////////////////////////
+
     const { navigate } = this.props.navigation;
     const { navigation } = this.props;
     const item = navigation.getParam("item");
-    // const keys = Object.keys(this.props);
+  
 
     if(this.state.isLoading) {
 
@@ -106,11 +156,6 @@ import {
 
       return (
         <ScrollView style={Styles.container}>
-          {/* {keys.map(k => {
-            return (
-              <Text>{k}: {this.props[k].toString()}</Text>
-            );
-          })}  */}
             <ImageBackground 
               source={{uri: `https://image.tmdb.org/t/p/w500${backdrop_path}` }}
               resizeMode= 'cover'
@@ -130,7 +175,7 @@ import {
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    onPress={() =>  navigate('Player', {...dataSource})}>
+                    onPress={() =>  navigate('Player', {...dataSourceVideos})}>
                     <MaterialIcons name="play-circle-outline" size={70} color="rgba(255, 255, 255, 0.5)"/>   
                   </TouchableOpacity>      
                 </View>
@@ -142,33 +187,48 @@ import {
           <View style={Styles.box_2}> 
 
             <Text style={Styles.title}>{title}</Text>
+
             <View style={Styles.info}>
-              {/* <AntDesign name="like1" size={15} color="#dedede" />  */}
+
               <Text style={Styles.percentage}>Recommandé à {rating}%</Text>   
-              <Text style={Styles.infoText}>{date}</Text>          
+              <Text style={Styles.infoText}>{date}</Text>  
+
               <View style={Styles.btnHdr}>
                 <MaterialCommunityIcons name="hdr" size={25} color="#000" />    
-              </View>    
+              </View>  
           </View>
+
             <Text style={Styles.description}>{overview}</Text>
+
+            <View style={Styles.personality}>
+              <Text style={Styles.description}>Avec: {actor_1}, {actor_2}, {actor_3}</Text>
+              <Text style={Styles.description}>Créateurs: {creator_1}, {creator_2}</Text>
+            </View>
           </View>
 
           <View style={Styles.box_3}>
             <TouchableOpacity style={Styles.blockIcons}>
-              <Entypo name="plus" size={30} color="#fff" />    
+              <Entypo name="plus" size={25} color="#fff" />    
               <Text style={Styles.blockIconText}>Ma liste</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={Styles.blockIcons}>
-                <SimpleLineIcons name="like" size={30} color="#fff" /> 
+                <SimpleLineIcons name="like" size={25} color="#fff" /> 
                 <Text style={Styles.blockIconText}>Evaluer</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={Styles.blockIcons}>
-                <Ionicons name="md-share" size={30} color="#fff" /> 
+                <Ionicons name="md-share" size={25} color="#fff" /> 
                 <Text style={Styles.blockIconText}>Partager</Text>
             </TouchableOpacity>
           </View>
+
+          <View style={Styles.separator}>
+            <Text style={Styles.ongletsContainer}></Text>
+            <Text style={Styles.onglet_title}>TITRES SIMILAIRES</Text>
+            <Text style={[Styles.description, Styles.space]}>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</Text>
+          </View>
+
 
         </ScrollView>
       )
@@ -243,10 +303,10 @@ const Styles = StyleSheet.create({
     borderRadius: 4
   },
   description: {
-    color: "#fff",
+    color: "#ddd",
     fontSize: 14,
-    letterSpacing: 0.5,
-    lineHeight: 25
+    letterSpacing: 0.2,
+    lineHeight: 20
   },
   box_3: {
     flexDirection: "row",
@@ -262,5 +322,30 @@ const Styles = StyleSheet.create({
     position: "relative",
     bottom: -5,
     color: "#fff"
+  },
+  personality: {
+    paddingTop: 10,
+  },
+  separator: {
+    borderTopColor: "#000",
+    borderTopWidth: 2.5,
+    borderStyle: "solid"
+  },
+  space: {
+    paddingTop: 30,
+  },
+  ongletsContainer: {
+    width: "40%",
+    marginLeft: 10,
+    borderTopColor: "#E50914",
+    borderTopWidth: 4,
+    borderStyle: "solid",
+  },
+  onglet_title: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    paddingLeft: 10
   }
+
 })

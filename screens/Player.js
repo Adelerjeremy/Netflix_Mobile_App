@@ -15,10 +15,6 @@ import {
   WebView } from 'react-native';
 
 
-  
-
-
-
 class Player extends React.Component {
   constructor(props) {
     super(props);
