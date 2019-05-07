@@ -5,7 +5,8 @@ import Movies from './screens/Movies';
 import MaListe from './screens/MaListe';
 import DetailsMovie from './screens/DetailsMovie';
 import DetailsSerie from './screens/DetailsSerie';
-import Player from './screens/Player';
+import PlayerStream from './screens/PlayerStream';
+import PlayerTrailer from './screens/PlayerTrailer';
 
 import { 
   Button, 
@@ -292,21 +293,21 @@ class DetailsSerieScreen extends React.Component {
 
 
 
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////[ P L A Y E R ]/////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ P L A Y E R :  S T R E A M I N G ]/////////////////////////////
 
 
-class PlayerScreen extends React.Component {
+class PlayerStreamScreen extends React.Component {
   static navigationOptions = {
     //To hide the NavigationBar from current Screen
     header: null
   };
   componentDidMount () {
     StatusBar.setHidden(true);
-    ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+    ScreenOrientation.allowAsync(ScreenOrientation.Orientation.LANDSCAPE);
   }
   componentWillUnmount () {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT);
   }
   
 
@@ -314,12 +315,39 @@ class PlayerScreen extends React.Component {
   render() {
     return (
       <View allow="portrait" style={Styles.playerPage}>
-        <Player />
+        <PlayerStream />
       </View>
     );
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ P L A Y E R :  S T R E A M I N G ]/////////////////////////////
+
+
+class PlayerTrailerScreen extends React.Component {
+  static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+  componentDidMount () {
+    StatusBar.setHidden(true);
+    ScreenOrientation.allowAsync(ScreenOrientation.Orientation.LANDSCAPE);
+  }
+  componentWillUnmount () {
+    ScreenOrientation.allowAsync(ScreenOrientation.Orientation.PORTRAIT);
+  }
+  
+
+ 
+  render() {
+    return (
+      <View allow="portrait" style={Styles.playerPage}>
+        <PlayerTrailer />
+      </View>
+    );
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////[ T R A N S I T I O N ]/////////////////////////////
@@ -371,7 +399,8 @@ const HomeStack = createStackNavigator({
  Home: HomeScreen,
  DetailsMovie: DetailsMovieScreen,
  DetailsSerie: DetailsSerieScreen,
- Player: PlayerScreen,
+ PlayerStream: PlayerStreamScreen,
+ PlayerTrailer: PlayerTrailerScreen,
  Series: SeriesScreen,
  Movies: MoviesScreen,
  MaListe: MaListeScreen,    
@@ -381,6 +410,8 @@ const SeriesStack = createStackNavigator({
  Home: HomeScreen,
  DetailsMovie: DetailsMovieScreen,
  DetailsSerie: DetailsSerieScreen,
+ PlayerStream: PlayerStreamScreen,
+ PlayerTrailer: PlayerTrailerScreen,
  Series: SeriesScreen ,
  Movies: MoviesScreen ,
  MaListe: MaListeScreen
@@ -390,6 +421,8 @@ const MoviesStack = createStackNavigator({
  Home: HomeScreen,
  DetailsMovie: DetailsMovieScreen,
  DetailsSerie: DetailsSerieScreen,
+ PlayerStream: PlayerStreamScreen,
+ PlayerTrailer: PlayerTrailerScreen,
  Series: SeriesScreen ,
  Movies: MoviesScreen ,
  MaListe: MaListeScreen
@@ -399,6 +432,8 @@ const MaListeStack = createStackNavigator({
  Home: HomeScreen,
  DetailsMovie: DetailsMovieScreen,
  DetailsSerie: DetailsSerieScreen,
+ PlayerStream: PlayerStreamScreen,
+ PlayerTrailer: PlayerTrailerScreen,
  Series: SeriesScreen ,
  Movies: MoviesScreen ,
  MaListe: MaListeScreen

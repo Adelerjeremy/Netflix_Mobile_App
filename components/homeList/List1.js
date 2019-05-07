@@ -71,7 +71,7 @@ class List1 extends React.Component {
               )}
               horizontal
               style={{zIndex: 10}}
-              keyExtractor={dataSource.id}
+              keyExtractor={item => item.id.toString()}
               data={dataSource}
               renderItem={({item, separators}) => (
                 <View>

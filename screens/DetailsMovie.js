@@ -22,14 +22,17 @@ import {
   TouchableOpacity } from 'react-native';
 
 
- class DetailsMovie extends React.Component {
+ class DetailsMovie extends React.PureComponent {
 
    constructor(props) {
      super(props);
      this.state= {
         isLoading: true,
-        dataSourceVideos: [],
+        dataSourceTrailers: [],
         dataSourceCredits: [],
+        dataSourceAllInfo: [],
+        dataSourceStream: [],
+        dataSourceGenres: [],
         id:""
      }
    }
@@ -39,29 +42,52 @@ import {
 
      /////////////////////////////[ U R L S ]//////////////////////////////////////
     const urlCredit = `https://api.themoviedb.org/3/movie/${this.props.navigation.state.params.id}/credits?api_key=${Config.API_KEY}`;
-    const urlVideo = `https://api.themoviedb.org/3/movie/${this.props.navigation.state.params.id}/videos?api_key=${Config.API_KEY}`;
+    const urlTrailer = `https://api.themoviedb.org/3/movie/${this.props.navigation.state.params.id}/videos?api_key=${Config.API_KEY}`;
+    const urlAllInfo =  `https://api.themoviedb.org/3/movie/${this.props.navigation.state.params.id}?api_key=${Config.API_KEY}`;
 
     //---------------------------------------------------------------------------->
 
-    console.log('DetailsMovie#componentDidMount//urlVideo: ', urlVideo);
-    console.log('DetailsMovie#componentDidMount//urlCredit: ', urlCredit);
+    console.log('DetailsMovie#componentDidMount//urlTrailer : ', urlTrailer);
+    console.log('DetailsMovie#componentDidMount//urlCredit : ', urlCredit);
+    console.log('DetailsMovie#componentDidMount//urlAllInfo : ', urlAllInfo);
+
     console.log('DetailsMovie#componentDidMount//this.props.navigation.state.params.id: ', this.props.navigation.state.params.id)
+
     //---------------------------------------------------------------------------->
 
-    /////////////////////////////[ F E T C H : V I D E O S ]/////////////////////////////////
-      fetch(urlVideo)
+    /////////////////////////////[ F E T C H : T R A I L E R S ]/////////////////////////////////
+      fetch(urlTrailer)
         .then(res => res.json())
         .then(data => {
-          console.log('DetailsMovie#componentDidMount//urlVideos data: ', data);
+          console.log('DetailsMovie#componentDidMount//urlTrailer data: ', data);
           this.setState({
             isLoading: false,
-            dataSourceVideos: data.results[0]
+            dataSourceTrailers: data.results[0]
           })
           .catch((error) => {
             console.error(error);
         });
-        console.log('<< DetailsMovie#componentDidMount//urlVideo');
+        console.log('<< DetailsMovie#componentDidMount//urlTrailer');
       });
+    /////////////////////////////[ F E T C H : A L L - I N F O ]///////////////////////////////// note: Genres targetable ici!
+      fetch(urlAllInfo)
+      .then(res => res.json())
+      .then(data => {
+        console.log('DetailsMovie#componentDidMount//urlAllInfo data: ', data);
+        this.setState({
+          isLoading: false,
+          dataSourceAllInfo: data,
+          dataSourceGenres: {
+            data_genre_1: data.genres[0].name,
+            data_genre_2: data.genres[1].name,
+            data_genre_3: data.genres[2].name,
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+      });
+      console.log('<< DetailsMovie#componentDidMount//urlAllInfo');
+    });
     /////////////////////////////[ F E T C H : C R E D I T S ]/////////////////////////////////
       fetch(urlCredit)
       .then(res => res.json())
@@ -95,12 +121,16 @@ import {
       vote_average,
       title,
       backdrop_path,
+      poster_path,
       overview,
       release_date,
       genre_ids,
     } = this.props.navigation.state.params;
-    const { dataSourceVideos, dataSourceCredits,data_1  } = this.state;
+    const { dataSourceTrailers, dataSourceCredits, dataSourceAllInfo , dataSourceGenres } = this.state;
 
+    const genre_1 = dataSourceGenres.data_genre_1;
+    const genre_2 = dataSourceGenres.data_genre_2;
+    const genre_3 = dataSourceGenres.data_genre_3;
     ///////////////////////////////////////////////////////
     //////////////////[ A C T O R S ]/////////////////////
     const actor_1 = dataSourceCredits.data_1;
@@ -119,7 +149,8 @@ import {
     console.log('DetailsMovie#render()//creator_2 ', creator_2)
      ///////////////////////////////////////////////////////
 
-    console.log('DetailsMovie#render()//dataSource.key: ', dataSourceVideos.key)
+    console.log('DetailsMovie#render()//dataSource.key : ', dataSourceTrailers.key)
+    console.log('<< DetailsMovie#render()//dataSourceAllInfo.imdb_id : ', dataSourceAllInfo.imdb_id);
     console.log('>> DetailsMovie#render()');
     console.log('DetailsMovie#render()/this.props ', this.props);
     console.log('DetailsMovie#render()/this.props.navigation.state.params ', this.props.navigation.state.params)
@@ -175,7 +206,7 @@ import {
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    onPress={() =>  navigate('Player', {...dataSourceVideos})}>
+                    onPress={() =>  navigate('PlayerStream', {...dataSourceAllInfo})}>
                     <MaterialIcons name="play-circle-outline" size={70} color="rgba(255, 255, 255, 0.5)"/>   
                   </TouchableOpacity>      
                 </View>
@@ -225,11 +256,38 @@ import {
 
           <View style={Styles.separator}>
             <Text style={Styles.ongletsContainer}></Text>
-            <Text style={Styles.onglet_title}>TITRES SIMILAIRES</Text>
-            <Text style={[Styles.description, Styles.space]}>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</Text>
+            <Text style={[Styles.onglet_title, Styles.space]}>TRAILER</Text>
+            <View style={Styles.box}>
+              <ImageBackground 
+                source={{uri: `https://image.tmdb.org/t/p/w500${poster_path}` }}
+                resizeMode= 'cover'
+                style={Styles.trailerbg}>
+
+                <LinearGradient 
+                colors={['rgba(19,19,19,0.5)','transparent','rgba(19,19,19,0.5)']} 
+                resizeMode="cover"
+                style={Styles.linearGTrailer}>  
+
+                  <View style={Styles.box_1}>
+                    <TouchableOpacity
+                      onPress={() =>  navigate('PlayerTrailer', {...dataSourceTrailers})}>
+                      <MaterialIcons name="play-circle-outline" size={60} color="rgba(255, 255, 255, 0.8)"/>   
+                    </TouchableOpacity>      
+                  </View>
+                </LinearGradient>      
+              </ImageBackground>
+
+              <View style={{ alignSelf:"center", alignItems:"center" }}>
+                <Text style={Styles.trailer_Title}>Watch</Text>
+                <View style={{ alignItems:"center" }}>
+                  <Text style={Styles.trailer_Text}>{title}</Text>
+                  <Text style={[Styles.trailer_Text,{fontSize: 11}]}>{genre_1}, {genre_2}, {genre_3}</Text>
+                  <Text style={Styles.trailer_Text}>{date}</Text>
+                </View>
+              </View>
+
+            </View>
           </View>
-
-
         </ScrollView>
       )
     }
@@ -243,6 +301,11 @@ export default withNavigation(DetailsMovie);
 const Styles = StyleSheet.create({
   container: {
     flex:1
+  },
+  box: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   box_1: {
     flex: 1,
@@ -261,9 +324,13 @@ const Styles = StyleSheet.create({
     width:  Dimensions.get('screen').width,
     height: "100%",
   },
+  linearGTrailer: {
+    width: 140,
+    height: 160
+  },
   imBg: {
     zIndex: 2,
-    width: "100%",
+    width:  "100%",
     height: 280,
   },
   imBg_2: {
@@ -274,6 +341,11 @@ const Styles = StyleSheet.create({
     left: 0,
     width:Dimensions.get('screen').width,
     height: 280,
+  },
+  trailerbg: {
+    zIndex: 2,
+    width: 140,
+    height: 160,
   },
   title: {
     fontSize: 30,
@@ -329,10 +401,11 @@ const Styles = StyleSheet.create({
   separator: {
     borderTopColor: "#000",
     borderTopWidth: 2.5,
-    borderStyle: "solid"
+    borderStyle: "solid",
+    paddingBottom: 20
   },
   space: {
-    paddingTop: 30,
+    paddingBottom: 30,
   },
   ongletsContainer: {
     width: "40%",
@@ -346,6 +419,14 @@ const Styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     paddingLeft: 10
+  },
+  trailer_Title: {
+    fontSize: 18,
+    color: "#E50914",
+    fontWeight: "bold"
+  },
+  trailer_Text: {
+    color: "#ddd"
   }
 
 })

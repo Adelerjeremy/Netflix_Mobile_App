@@ -1,8 +1,3 @@
-
-// import VideoPlayer from 'expo-video-player'
-// import Iframe from 'react-iframe';
-// import VideoPlayer from '@expo/videoplayer';
-// import { Audio, Video } from 'expo';
 import React from 'react';
 import { LinearGradient } from 'expo';
 import { withNavigation } from 'react-navigation';
@@ -15,7 +10,7 @@ import {
   WebView } from 'react-native';
 
 
-class Player extends React.Component {
+class PlayerTrailer extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
@@ -26,15 +21,19 @@ class Player extends React.Component {
 
 
   render() {
-    console.log('>> Player#render()')
+    console.log('>> PlayerTrailer#render()')
     const { navigation } = this.props;
     const { 
       key
     }= this.props.navigation.state.params;
-    console.log('Player#render()//key: ', key)
-    console.log('Player#render()//this.props: ', this.props)
-    console.log('Player#render()//this.props.key: ', this.props.key)
-  
+
+    console.log('PlayerTrailer#render()//key: ', key)
+    console.log('PlayerTrailer#render()//this.props: ', this.props)
+    console.log('PlayerTrailer#render()//this.props.key: ', this.props.key)
+
+    const urlTrailer = `https://www.youtube.com/embed/${key}?rel=0&modestbranding=1&autoplay=1&autohide=1&showinfo=0&controls=2&frameborder=0&allowfullscreen&playsinline=1&fs=1&theme=light`
+    console.log('PlayerTrailer#render(//urlTrailer : ', urlTrailer);
+
     if (this.state.isError === true) {
       return <Text>...Loading Error</Text>
     }
@@ -42,7 +41,7 @@ class Player extends React.Component {
     return (
       <View>
         <LinearGradient 
-        colors={['rgba(0,0,0,0.98)','rgba(0,0,0,0.6)','transparent']} 
+        colors={['rgba(0,0,0,0.6)','rgba(0,0,0,0.3)','transparent']} 
         style={Styles.backIcon}>
           <TouchableOpacity
           style={Styles.icon}
@@ -53,7 +52,6 @@ class Player extends React.Component {
 
         <WebView
           style={Styles.container}
-          injectJavaScript={true}
           useWebKit={true}
           UIWebViews={true}
           scalesPageToFit
@@ -62,14 +60,13 @@ class Player extends React.Component {
           mediaPlaybackRequiresUserAction={false}
           frameborder={0}
           allowfullscreen
-          source={{ uri: `https://www.youtube.com/embed/${key}?rel=0&modestbranding=1&autoplay=1&autohide=1&showinfo=0&controls=2&frameborder=0&allowfullscreen&playsinline=1&fs=1&theme=light`}}
-
+          source={{ uri: urlTrailer}}
         />
       </View>
     );
   }
 }
-export default withNavigation(Player);
+export default withNavigation(PlayerTrailer);
 
 const Styles = StyleSheet.create({
   container: {
@@ -93,4 +90,4 @@ const Styles = StyleSheet.create({
   }
 });
 
-// https://www.youtube.com/embed/TcMBFSGVi1c?rel=0&frameborder=0&autoplay=1&fs=1&showinfo=0&controls=1&onFullscreen=true&playsinline=1&isFullscreen=true&allowsInlineMediaPlayback=true&modestbranding=1"
+// source={{ uri: `https://www.youtube.com/embed/${key}?rel=0&modestbranding=1&autoplay=1&autohide=1&showinfo=0&controls=2&frameborder=0&allowfullscreen&playsinline=1&fs=1&theme=light`}}
