@@ -1,6 +1,4 @@
 import React from 'react';
-import Config from '../../Config';
-import DetailsMovie from '../../screens/DetailsMovie';
 import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, Button,TouchableOpacity } from 'react-native';
 import { createStackNavigator, createAppContainer, withNavigation } from 'react-navigation';
 
@@ -9,53 +7,18 @@ import { createStackNavigator, createAppContainer, withNavigation } from 'react-
 class List1 extends React.Component {
 
     constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: true,
-            dataSource: [],
+      super(props);
+      this.state = {
+          dataSource: [],
 
-        }
-
-    }
-
-
-    componentDidMount() {
-      console.log('>> List1#componentDidMount');
-      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${Config.API_KEY}&page=1&limit=20`;
-      console.log('url', url);
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          console.log('List1#Popular#componentDidMount data', data);
-
-          this.setState({
-            isLoading: false,
-            dataSource: data.results
-          })
-
-          .catch((error) => {
-            console.error(error);
-        });
-        console.log('<< List1#componentDidMount');
-      });
-
+      }
     }
 
 
   render() {
     const { navigate } = this.props.navigation;
-    const {dataSource} = this.state;
-    if(this.state.isLoading) {
+    const {dataSource} = this.props;
 
-      return (
-        <View style={Styles.container}>
-
-          <ActivityIndicator/> 
-
-        </View>
-      );
-
-    } else {
 
       return (
 
@@ -93,7 +56,7 @@ class List1 extends React.Component {
       )
     }
   }
-}
+
  export default withNavigation(List1);
 
 const Styles = StyleSheet.create({

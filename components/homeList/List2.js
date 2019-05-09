@@ -1,5 +1,4 @@
 import React from 'react';
-import Config from '../../Config';
 import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { createStackNavigator, createAppContainer, withNavigation } from 'react-navigation';
 
@@ -10,52 +9,19 @@ class List2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true,
-            dataSource: [],
+          dataSource: [],
 
         }
-
     }
 
-    componentDidMount() {
-      console.log('>> List2#componentDidMount');
-      const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${Config.API_KEY}&page=1&limit=20`;
-      console.log('url', url);
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          console.log('List2#top_rated#componentDidMount data', data);
 
-          this.setState({
-            isLoading: false,
-            dataSource: data.results
-          })
-
-          .catch((error) => {
-            console.error(error);
-        });
-        console.log('<< List2#componentDidMount');
-      });
-
-    }
 
 
     render() {
 
       const { navigate } = this.props.navigation;
-      const {dataSource} = this.state;
+      const {dataSource} = this.props;
 
-      if(this.state.isLoading) {
-        return (
-          <View style={Styles.container}>
-  
-            <ActivityIndicator/> 
-  
-          </View>
-        );
-  
-      } else {
-  
         return (
   
           <View style={Styles.container}>
@@ -92,7 +58,7 @@ class List2 extends React.Component {
         )
       }
     }
-  }
+  
 export default withNavigation(List2);
 
 const Styles = StyleSheet.create({

@@ -7,6 +7,7 @@ import DetailsMovie from './screens/DetailsMovie';
 import DetailsSerie from './screens/DetailsSerie';
 import PlayerStream from './screens/PlayerStream';
 import PlayerTrailer from './screens/PlayerTrailer';
+import DetailsSimilarMovie from'./screens/DetailsSimilarMovie';
 
 import { 
   Button, 
@@ -17,7 +18,8 @@ import {
   StatusBar, 
   Image, 
   ScrollView,
-  Dimensions} from 'react-native';
+  Dimensions,
+  SafeAreaView} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import { ScreenOrientation } from 'expo';
@@ -51,11 +53,11 @@ class HomeScreen extends React.Component {
  render() {
    return (
   
-     <View >
+     <View>
 
       <Home />  
 
-      <View style={{position: "absolute", top: 10, right: 0}}>
+      <View style={{position: "absolute", top: 20, right: 0}}>
         <View style={{flexDirection: "row", justifyContent: 'center'}}>
 
           <TouchableOpacity 
@@ -117,7 +119,7 @@ class SeriesScreen extends React.Component {
 
           <Series />  
 
-          <View style={{position: "absolute", top: 10, right: 0}}>
+          <View style={{position: "absolute", top: 20, right: 0}}>
           <View style={{flexDirection: "row", justifyContent: 'center'}}>
 
             <TouchableOpacity 
@@ -178,7 +180,7 @@ class MoviesScreen extends React.Component {
 
         <Movies />
 
-        <View style={{position: "absolute", top: 10, right: 0}}>
+        <View style={{position: "absolute", top: 20, right: 0}}>
           <View style={{flexDirection: "row", justifyContent: 'center'}}>
 
             <TouchableOpacity 
@@ -266,6 +268,31 @@ class DetailsMovieScreen extends React.Component {
 }
 
 //////////////////////////////////////////////////////////////////////////////
+//////////////////////////[ D E T A I L S : M O V I E ]/////////////////////////////
+
+
+class DetailsSimilarMovieScreen extends React.Component {
+  static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
+
+
+    componentDidMount() {
+      //To hide all status bar Screen
+      StatusBar.setHidden(true);
+    }
+ 
+  render() {
+    return (
+      <View style={Styles.detailPage}>
+        <DetailsSimilarMovie />
+      </View>
+    );
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
 //////////////////////////[ D E T A I L S : S E R I E ]/////////////////////////////
 
 
@@ -289,6 +316,7 @@ class DetailsSerieScreen extends React.Component {
     );
   }
 }
+
 
 
 
@@ -399,6 +427,7 @@ const HomeStack = createStackNavigator({
  Home: HomeScreen,
  DetailsMovie: DetailsMovieScreen,
  DetailsSerie: DetailsSerieScreen,
+ DetailsSimilarMovie: DetailsSimilarMovieScreen,
  PlayerStream: PlayerStreamScreen,
  PlayerTrailer: PlayerTrailerScreen,
  Series: SeriesScreen,

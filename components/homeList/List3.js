@@ -1,5 +1,4 @@
 import React from 'react';
-import Config from '../../Config';
 import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, Button,TouchableOpacity } from 'react-native';
 import { createStackNavigator, createAppContainer, withNavigation } from 'react-navigation';
 
@@ -9,50 +8,19 @@ class List3 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true,
+
             dataSource: [],
 
         }
 
     }
 
-    componentDidMount() {
-      console.log('>> List3#componentDidMount');
-      const url = `https://api.themoviedb.org/3/tv/popular?api_key=${Config.API_KEY}&page=1&limit=20`;
-      console.log('url', url);
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          console.log('List3#/SeriesUS#/componentDidMount data', data);
 
-          this.setState({
-            isLoading: false,
-            dataSource: data.results
-          })
-
-          .catch((error) => {
-            console.error(error);
-        });
-        console.log('<< List3#componentDidMount');
-      });
-
-    }
 
     render() {
       const { navigate } = this.props.navigation;
-      const {dataSource} = this.state;
-      if(this.state.isLoading) {
-  
-        return (
-          <View style={Styles.container}>
-  
-            <ActivityIndicator/> 
-  
-          </View>
-        );
-  
-      } else {
-  
+      const {dataSource} = this.props;
+
         return (
   
           <View style={Styles.container}>
@@ -89,7 +57,7 @@ class List3 extends React.Component {
         )
       }
     }
-  }
+  
    export default withNavigation(List3);
    
   const Styles = StyleSheet.create({

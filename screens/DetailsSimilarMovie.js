@@ -26,7 +26,7 @@ import {
   TouchableOpacity } from 'react-native';
 
 
- class DetailsMovie extends React.PureComponent {
+ class DetailsSimilarMovie extends React.PureComponent {
 
    constructor(props) {
      super(props);
@@ -214,8 +214,7 @@ import {
     const { navigate, goBack } = this.props.navigation;
     const { navigation } = this.props;
     const item = navigation.getParam("item");
-    let TabChangeTrailer = this.state.activeTab !== "trailer" ? "#E50914" : "rgba(0, 0, 0, 0.2)";
-    let TabChangeSimilar = this.state.activeTab !== "similar" ? "#E50914" : "rgba(0, 0, 0, 0.2)";
+  
 
     if(this.state.isLoading) {
 
@@ -303,7 +302,7 @@ import {
             <View style={{justifyContent:"space-around", flexDirection:'row'}}>
 
               <View style={{width:"40%"}}>
-                <Text style={[Styles.ongletsContainer,{borderTopColor: TabChangeSimilar}]}></Text>
+                <Text style={Styles.ongletsContainer}></Text>
                 <TouchableOpacity 
                   onPress={() => {this.onPressTabTrailer()}}>
                   <Text style={[Styles.onglet_title, Styles.space]}>TRAILER</Text>
@@ -311,7 +310,7 @@ import {
               </View>
 
               <View style={{width:"40%"}}>
-                <Text style={[Styles.ongletsContainer,{borderTopColor: TabChangeTrailer}]}></Text>
+                <Text style={Styles.ongletsContainer}></Text>
                 <TouchableOpacity 
                   onPress={() => {this.onPressTabSimilar()}}>
                   <Text style={[Styles.onglet_title, Styles.space]}>SIMILAR TITLE</Text>
@@ -329,7 +328,7 @@ import {
     }
   }
 }
-export default withNavigation(DetailsMovie);  
+export default withNavigation(DetailsSimilarMovie);  
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////[ S T Y L E S ]/////////////////////////////
@@ -445,6 +444,7 @@ const Styles = StyleSheet.create({
   },
   ongletsContainer: {
     width: "100%",
+    borderTopColor: "#E50914",
     borderTopWidth: 4,
     borderStyle: "solid",
   },
@@ -452,7 +452,6 @@ const Styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
-    alignSelf: "center"
   },
   trailer_Title: {
     fontSize: 18,
