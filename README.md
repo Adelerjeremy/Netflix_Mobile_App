@@ -1,4 +1,5 @@
 # **ADFLIX**
+Voici ma toute première application React native après 1 mois d'apprentissage en autodidacte.
 
 **Application de Streaming** - *(Netflix like)* - est une application React Native utilisant l'[API TheMovieDb](https://www.themoviedb.org/). 
 
