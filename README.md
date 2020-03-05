@@ -8,6 +8,7 @@ Voici ma toute première application React native après 1 mois d'apprentissage 
 
 ![](https://media.giphy.com/media/YSApS8PESC8EGKQmE3/giphy.gif)
 
+*✔️ Les vidéos sont lancé en mode paysage et non portrait.*
 ```
 Cette dernière nous permet :
 
